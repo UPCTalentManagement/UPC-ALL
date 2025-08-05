@@ -628,7 +628,7 @@ fetch(ENDPOINT)
   function displayProducts(productsList) {
   productGrid.innerHTML = '';
 
-  productsList.forEach((p, index)  => {
+  productsList.slice().reverse().forEach((p, index)  => {
     if (!p["Public URL"]) return; // Skip if no URL
 
     const fileId = p["Public URL"].match(/[-\w]{25,}/)?.[0];
