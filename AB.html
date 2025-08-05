@@ -312,15 +312,15 @@
     });
 
     const antibiotics = {
-      amoxicillin: { strengths: [156, 228, 312, 457, 600], dose: [25, 45], frequency: "Every 12 hours", maxDose: null, notes: "First-line for most pediatric infections" },
-      cefixime: { strengths: [100], dose: [8, 8], frequency: "Once daily or BID", maxDose: 400, notes: "First-line for uncomplicated UTIs" },
+      amoxicillin: { strengths: [156, 228, 312, 457, 600], dose: [15, 25], frequency: "Every 12 hours", maxDose: null, notes: "First-line for most pediatric infections" },
+      cefixime: { strengths: [100], dose: [8, 8], frequency: "Once daily or divided on two doses", maxDose: 400, notes: "First-line for uncomplicated UTIs" },
       cefradine: { strengths: [125, 250], dose: [25, 50], frequency: "Divided on 4 times daily", notes: "Monitor for GI side effects" },
       cefaclor: { strengths: [125, 250], dose: [20, 40], frequency: "Divided on 3 times daily", notes: "Avoid in penicillin allergy" },
-      cefdinir: { strengths: [125], dose: [14, 14], frequency: "Once daily or BID", notes: "May cause red stools (harmless)" },
-      cefadroxil: { strengths: [125, 250, 500], dose: [30, 30], frequency: "Divided on twice daily", notes: "Preferred for skin/soft tissue infections" },
+      cefdinir: { strengths: [125], dose: [14, 14], frequency: "Once daily or Twice", notes: "May cause red stools (harmless)" },
+      cefadroxil: { strengths: [125, 250, 500], dose: [25, 25], frequency: "Divided on twice daily", notes: "Preferred for skin/soft tissue infections" },
       clarithromycin: { strengths: [125, 250], dose: [15, 15], frequency: "Divided on twice daily", notes: "Macrolide alternative for penicillin allergy" },
-      cefalexin: { strengths: [125, 250], dose: [25, 50], frequency: "Divided 4 times daily", notes: "First-line for streptococcal infections" },
-      cotrimoxazole: { strengths: [200], dose: [6, 12], frequency: "Divided on twice daily", notes: "Contains sulfa - check for allergies", calculationNote: "Dose based on trimethoprim component" },
+      cefalexin: { strengths: [125, 250], dose: [25, 50], frequency: "Divided on 3 - 4 times daily", notes: "First-line for streptococcal infections" },
+      cotrimoxazole: { strengths: [200], dose: [10, 20], frequency: "Divided on twice daily", notes: "Contains sulfa - check for allergies", calculationNote: "Dose based on trimethoprim component" },
     };
 
     function calculateDose() {
