@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مشروع رشيق - نظام متكامل للرشاقة والصحة</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1a2980;
+      --secondary: #26d0ce;
+      --accent: #ff7e5f;
+      --light: rgba(255, 255, 255, 0.85);
+      --dark: #0a0e29;
+      --gray: #eef2f7;
+      --transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', 'Tahoma', 'Cairo', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--light);
+      line-height: 1.8;
+      padding: 1rem;
+      min-height: 100vh;
+      scroll-behavior: smooth;
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    header {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      animation: fadeInDown 0.8s ease;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+
+    nav {
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(8px);
+      padding: 1.2rem;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      animation: fadeIn 1.2s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0.5rem;
+      font-weight: 600;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.12);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      font-size: 1.05rem;
+    }
+
+    nav a:hover, nav a.active {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    nav a i {
+      margin-left: 8px;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (min-width: 992px) {
+      main {
+        grid-template-columns: 1fr 1fr;
+      }
+      #products {
+        grid-column: span 2;
+      }
+    }
+
+    section {
+      margin-bottom: 0;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      animation: fadeInUp 1s ease;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      transition: var(--transition);
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: #ffddc1;
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+      text-align: center;
+      position: relative;
+      padding-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      border-radius: 10px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .input-icon {
+      position: relative;
+    }
+
+    .input-icon i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    input, select {
+      padding: 0.9rem 1rem 0.9rem 3rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 1.05rem;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--dark);
+      width: 100%;
+      transition: var(--transition);
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 126, 95, 0.25);
+    }
+
+    button {
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--accent), #ff5e3a);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.1rem;
+      display: block;
+      width: 100%;
+      margin-top: 1.5rem;
+      box-shadow: 0 4px 15px rgba(255, 126, 95, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.4s ease;
+    }
+
+    button:hover::after {
+      transform: translateX(0);
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 20px rgba(255, 126, 95, 0.5);
+    }
+
+    .results, .tips {
+      margin-top: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--dark);
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      border-left: 4px solid var(--accent);
+    }
+
+    .results h3, .tips h3 {
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .results h3 i, .tips h3 i {
+      margin-left: 0.5rem;
+      color: var(--accent);
+    }
+
+    .bmi-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 1.2rem 0;
+      color: var(--primary);
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .bmi-category {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      margin: 0.5rem 0;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-top: 1rem;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
+      padding: 10px;
+    }
+
+    .product-card {
+      flex: 0 0 calc(100% - 20px);
+      background: #fff;
+      color: var(--dark);
+      padding: 1.8rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      text-align: center;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .product-image {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    }
+
+    .product-image img {
+      width: 70%;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+
+    .product-card h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .product-card ul {
+      text-align: right;
+      padding-right: 1.2rem;
+      list-style-type: none;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .product-card ul li {
+      margin-bottom: 0.8rem;
+      padding-right: 1.8rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .product-card ul li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      position: absolute;
+      right: 0;
+      top: 4px;
+      color: var(--secondary);
+      font-size: 0.9rem;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+      gap: 1rem;
+    }
+
+    .carousel-controls button {
+      width: auto;
+      padding: 0.8rem 1.8rem;
+      margin: 0;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      margin: 0 5px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .indicator.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 2rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.3rem;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    @media (min-width: 768px) {
+      .product-card {
+        flex: 0 0 calc(50% - 20px);
+      }
+    }
+
+    @media (min-width: 992px) {
+      .product-card {
+        flex: 0 0 calc(33.333% - 20px);
+      }
+    }
+
+    .progress-container {
+      margin: 1.5rem 0;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      height: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      border-radius: 10px;
+      width: 0;
+      transition: width 1.5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>مشروع رشيق</h1>
+      <p>"رشيق" هى مبادرة صحية من صيدليات المتحدة، هدفها تساعدك توصل لوزن صحي بطريقة آمنة، وخطوات بسيطة تناسب أسلوب حياتك. المبادرة تتماشى مع رؤية المملكة 2030 لتعزيز الصحة الوقائية وجودة الحياة.</p>
+    </header>
+
+    <nav>
+      <a href="main.html"><i class="fas fa-home"></i>  Home </a>
+      <a href="#bmi" ><i class="fas fa-calculator"></i>  BMI Calculator </a>
+      <a href="#tips"><i class="fas fa-lightbulb"></i> Weight Loss Tips</a>
+      <a href="#products"><i class="fas fa-shopping-bag"></i> Recommended Products</a>
+    </nav>
+
+    <main>
+      <section id="bmi">
+        <h2> BMI Calculator </h2>
+        <div class="form-group">
+          <label>الوزن (كجم)</label>
+          <div class="input-icon">
+            <i class="fas fa-weight"></i>
+            <input type="number" id="weight" placeholder="أدخل وزنك بالكيلوجرام">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>الطول (سم)</label>
+          <div class="input-icon">
+            <i class="fas fa-ruler-vertical"></i>
+            <input type="number" id="height" placeholder="أدخل طولك بالسنتيمتر">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>الجنس</label>
+          <div class="input-icon">
+            <i class="fas fa-venus-mars"></i>
+            <select id="gender">
+              <option value="male">ذكر</option>
+              <option value="female">أنثى</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>مستوى النشاط</label>
+          <div class="input-icon">
+            <i class="fas fa-running"></i>
+            <select id="activity">
+              <option value="low">قليل النشاط</option>
+              <option value="medium">متوسط</option>
+              <option value="high">نشط جداً</option>
+            </select>
+          </div>
+        </div>
+        
+        <button onclick="calculateBMI()">
+          <i class="fas fa-calculator"></i> احسب مؤشر كتلة الجسم
+        </button>
+        
+        <div class="results" id="bmiResult">
+          <h3><i class="fas fa-chart-line"></i> نتائج حساب BMI</h3>
+          <p>سيتم عرض نتائج حساب مؤشر كتلة الجسم هنا بعد إدخال البيانات.</p>
+        </div>
+      </section>
+
+      <section id="tips">
+        <h2>نصائح التخسيس</h2>
+        <div class="tips" id="tipBox">
+          <h3><i class="fas fa-lightbulb"></i> نصائحنا لك</h3>
+          <p>ستظهر هنا نصائح مخصصة بناءً على نتائج مؤشر كتلة الجسم ونمط حياتك.</p>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-label">
+            <!-- <span>التقدم نحو الهدف</span>
+            <span>65%</span> -->
+          </div>
+          <!-- <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%"></div>
+          </div> -->
+        </div>
+      </section>
+
+      <section id="products">
+        <h2>Product Main Selling Points </h2>
+        <div class="carousel-wrapper">
+          <div class="carousel" id="carousel">
+            <div class="product-card">
+              <div class="product-image">
+                <img src="rasheek/limitless.png" alt="Limitless Chromax Cut">
+              </div>
+                <h3>Limitless Chromax Cut</h3>
+                <ul>
+                  <li>منتج واحد يغنيك عن استخدام منتجين</li>
+                  <li>تركيبة لسد الشهية وزيادة الحرق</li>
+                  <li> يمكن استخدامه بأمان  مع مرضى الأمراض المزمنة</li>
+                </ul>
+              </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <img src="rasheek/glavolean.png" alt="Glavolean">
+              </div>
+              <h3>Glavolean </h3>
+              <ul>
+                <li>يزيد من معدل حرق الدهون</li>
+                <li>يشد القوام ويحافظ على العضلات أثناء التنحيف</li>
+                <li>يساعد على نزول دهون منطقة البطن</li>
+              </ul>
+            </div>
+            
+            <div class="product-card">
+              <div class="product-image">
+                <img src="rasheek/lcarnitin.png" alt="L-Carnitine">
+              </div>
+              <h3>Marneys L-Carnitine</h3>
+              <ul>
+                <li>يزيد من معدل حرق الدهون</li>
+                <li>يعزز الطاقة والنشاط </li>
+                <li>يدعم الأداء الرياضي ويعزز التحمل</li>
+              </ul>
+            </div>
+            <div class="product-card">
+              <div class="product-image">
+                <img src="rasheek/stevia.png" alt="stevia">
+              </div>
+              <h3>Stevia</h3>
+              <ul>
+                <li>يقلل السعرات المخفية خلال اليوم</li>
+                <li>يستخدم بأمان في المشروبات والمخبوزات </li>
+                <li>مصدر طبيعي وآمن بدون أضرار</li>
+              </ul>
+            </div>
+            <div class="product-card">
+              <div class="product-image">
+                <img src="rasheek/multi.png" alt="Multi Vitamin">
+              </div>
+              <h3>Multi-Vitamin</h3>
+              <ul>
+                <li>يعوض نقص الفيتامينات والمعادن</li>
+                <li>يحافظ على النشاط الذهني والبدني أثناء الدايت </li>
+                <li>يدعم الجهاز المناعي و الصحة العامة</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="carousel-controls">
+            <button onclick="scrollCarousel(-1)"><i class="fas fa-arrow-right"></i> السابق</button>
+            <button onclick="scrollCarousel(1)">التالي <i class="fas fa-arrow-left"></i></button>
+          </div>
+          
+          <div class="carousel-indicators">
+            <div class="indicator active"></div>
+            <div class="indicator"></div>
+            <div class="indicator"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <!-- <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div> -->
+      <p>© 2025 مشروع رشيق. جميع الحقوق محفوظة.</p>
+      <p>نظام متكامل لتحقيق الصحة واللياقة البدنية</p>
+    </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set active nav link based on scroll position
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('nav a');
+      
+      window.addEventListener('scroll', function() {
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          
+          if (pageYOffset >= (sectionTop - 150)) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+          }
+        });
+      });
+      
+      // Initialize progress bar animation
+      const progressFill = document.querySelector('.progress-fill');
+      setTimeout(() => {
+        progressFill.style.width = '65%';
+      }, 500);
+    });
+
+    function calculateBMI() {
+      const w = parseFloat(document.getElementById("weight").value);
+      const h = parseFloat(document.getElementById("height").value) / 100;
+      const gender = document.getElementById("gender").value;
+      const activity = document.getElementById("activity").value;
+      const result = document.getElementById("bmiResult");
+      const tipBox = document.getElementById("tipBox");
+
+      if (isNaN(w) || isNaN(h) || h === 0) {
+        result.innerHTML = `
+          <h3><i class="fas fa-exclamation-triangle"></i> خطأ في الإدخال</h3>
+          <p>يرجى إدخال بيانات صحيحة للوزن والطول.</p>
+        `;
+        return;
+      }
+
+      const bmi = (w / (h * h)).toFixed(1);
+      
+      let category = '';
+      let categoryClass = '';
+      
+      if (bmi < 18.5) {
+        category = 'نقص الوزن';
+        categoryClass = 'underweight';
+      } else if (bmi < 25) {
+        category = 'وزن طبيعي';
+        categoryClass = 'normal';
+      } else if (bmi < 30) {
+        category = 'زيادة في الوزن';
+        categoryClass = 'overweight';
+      } else {
+        category = 'سمنة';
+        categoryClass = 'obese';
+      }
+      
+      result.innerHTML = `
+        <h3><i class="fas fa-chart-line"></i> نتائج حساب BMI</h3>
+        <div class="bmi-value">${bmi}</div>
+        <div class="bmi-category ${categoryClass}">${category}</div>
+        <p>بناءً على طولك ووزنك، مؤشر كتلة جسمك هو ${bmi} الذي يصنف ضمن فئة ${category}.</p>
+      `;
+
+      let tip = "";
+      if (bmi < 18.5) {
+        tip = "وزنك أقل من الطبيعي. ينصح بزيادة السعرات الحرارية اليومية مع التركيز على الأطعمة الغنية بالبروتين والدهون الصحية. تمارين المقاومة ستساعد في بناء الكتلة العضلية.";
+      } else if (bmi < 25) {
+        tip = "مبروك! وزنك في النطاق الصحي المثالي. حافظ على نمط حياتك الصحي من خلال التغذية المتوازنة والنشاط البدني المنتظم. استمر في مراقبة وزنك شهريًا.";
+      } else if (bmi < 30) {
+        tip = "تعاني من زيادة في الوزن. ينصح بتقليل الدهون والسكريات وزيادة النشاط البدني. ابدأ بممارسة رياضة المشي 30 دقيقة يوميًا وقلل من الوجبات السريعة.";
+      } else {
+        tip = "تعاني من سمنة. ينصح باتباع نظام غذائي صحي تحت إشراف أخصائي تغذية وزيادة النشاط البدني تدريجيًا. المراقبة الطبية المنتظمة مهمة في هذه المرحلة.";
+      }
+
+      if (activity === "low") tip += "<br><br>نشاطك البدني منخفض. حاول زيادة نشاطك البدني تدريجياً بدءاً من 10 دقائق يومياً وزيادتها مع الوقت.";
+      if (gender === "female") tip += "<br><br>تأكدي من متابعة مستويات الحديد والفيتامينات خلال نظامك الغذائي، خاصة إذا كنت في سن الإنجاب.";
+
+      tipBox.innerHTML = `
+        <h3><i class="fas fa-lightbulb"></i> نصائح مخصصة لك</h3>
+        <p>${tip}</p>
+      `;
+      
+      // Smooth scroll to tips section
+      document.getElementById('tips').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    let currentSlide = 0;
+    
+    function scrollCarousel(direction) {
+      const carousel = document.getElementById('carousel');
+      const slides = document.querySelectorAll('.product-card');
+      const indicators = document.querySelectorAll('.indicator');
+      const slideWidth = slides[0].offsetWidth + 30; // width + gap
+      
+      currentSlide += direction;
+      
+      if (currentSlide < 0) currentSlide = slides.length - 1;
+      if (currentSlide >= slides.length) currentSlide = 0;
+      
+      carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+      
+      // Update indicators
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+      });
+    }
+  </script>
+</body>
+</html>
