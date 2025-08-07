@@ -37,6 +37,8 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 15px;
+      /* justify-content: center;
+      justify-items: center; */
     }
 
     header {
@@ -49,6 +51,7 @@
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      /* min-width: 1190px; */
     }
 
     @keyframes fadeInDown {
@@ -83,6 +86,7 @@
       animation: fadeIn 1.2s ease;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.1);
+       /* min-width: 1190px; */
     }
 
     nav a {
@@ -122,6 +126,7 @@
       #products {
         grid-column: span 2;
       }
+      
     }
 
     section {
@@ -295,32 +300,55 @@
     }
 
     .carousel-wrapper {
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-      margin-top: 1rem;
-    }
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
 
     .carousel {
-      display: flex;
-      gap: 1.5rem;
-      transition: transform 0.5s ease-in-out;
-      will-change: transform;
-      padding: 10px;
-    }
-
-    .product-card {
-      flex: 0 0 calc(100% - 20px);
+  display: flex;
+  gap: 1rem;
+  min-width: 100%;
+}
+   .product-card {
+      flex: 0 0 100%;
       background: #fff;
       color: var(--dark);
-      padding: 1.8rem;
+      padding: 2rem;
       border-radius: 16px;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
       text-align: center;
       transition: var(--transition);
       display: flex;
       flex-direction: column;
-      height: 100%;
+      min-height: 450px;
+      margin: 0;
+      box-sizing: border-box;
+      opacity: 1;
+    }
+
+    @media (min-width: 481px) {
+      .product-card {
+        padding: 2rem;
+        min-height: 450px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .product-card {
+        flex: 0 0 calc(50% - 20px);
+      }
+    }
+
+    @media (min-width: 992px) {
+      .product-card {
+        flex: 0 0 calc(33.333% - 20px);
+      }
+      
     }
 
     .product-card:hover {
@@ -339,11 +367,18 @@
       background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     }
 
+    @media (max-width: 768px) {
+      .product-image {
+        height: 150px;
+      }
+    }
+
     .product-image img {
       width: 70%;
       height: auto;
       object-fit: contain;
       transition: transform 0.5s ease;
+      max-height: 100%;
     }
 
     .product-card:hover .product-image img {
@@ -355,6 +390,23 @@
       margin-bottom: 1rem;
       font-size: 1.4rem;
       font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .product-card h3 {
+        font-size: 1.2rem;
+      }
+      header{
+            min-width: 795px;
+
+      }
+      section {
+       max-width: 795px;
+      }
+      nav {
+            min-width: 795px;
+
+      }
     }
 
     .product-card ul {
@@ -370,8 +422,26 @@
       padding-right: 1.8rem;
       position: relative;
       line-height: 1.6;
+      font-size: 0.95rem;
     }
 
+    @media (max-width: 768px) {
+      .product-card ul li {
+        font-size: 0.9rem;
+        margin-bottom: 0.6rem;
+      }
+      .product-card{
+        max-width: 500px;
+      }
+    }
+    /* @media(max-width: 968px) {
+      header{
+        min-width: 975px;
+      }
+      nav {
+        min-width: 975px;
+      }
+    } */
     .product-card ul li::before {
       content: '\f00c';
       font-family: 'Font Awesome 5 Free';
@@ -382,14 +452,6 @@
       color: var(--secondary);
       font-size: 0.9rem;
     }
-
-    .product-price {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin: 0.5rem 0 1.2rem;
-    }
-
     .carousel-controls {
       display: flex;
       justify-content: center;
@@ -492,6 +554,19 @@
       width: 0;
       transition: width 1.5s ease;
     }
+    @media (min-width: 768px) {
+  .product-card {
+    flex: 0 0 45%;
+    max-width: 45%;
+  }
+}
+
+@media (min-width: 992px) {
+  .product-card {
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+}
   </style>
 </head>
 <body>
@@ -502,10 +577,10 @@
     </header>
 
     <nav>
-      <a href="main.html"><i class="fas fa-home"></i>  Home </a>
       <a href="#bmi" ><i class="fas fa-calculator"></i>  BMI Calculator </a>
-      <a href="#tips"><i class="fas fa-lightbulb"></i> Weight Loss Tips</a>
+      <!-- <a href="#tips"><i class="fas fa-lightbulb"></i> Weight Loss Tips</a> -->
       <a href="#products"><i class="fas fa-shopping-bag"></i> Recommended Products</a>
+      <a href="main.html"><i class="fas fa-home"></i>  Home </a>
     </nav>
 
     <main>
@@ -601,7 +676,7 @@
               <h3>Glavolean </h3>
               <ul>
                 <li>يزيد من معدل حرق الدهون</li>
-                <li>يشد القوام ويحافظ على العضلات أثناء التنحيف</li>
+                <li>يساعد على شد القوام ويحافظ على العضلات أثناء التنحيف</li>
                 <li>يساعد على نزول دهون منطقة البطن</li>
               </ul>
             </div>
@@ -641,17 +716,18 @@
             </div>
           </div>
           
-          <div class="carousel-controls">
-            <button onclick="scrollCarousel(-1)"><i class="fas fa-arrow-right"></i> السابق</button>
-            <button onclick="scrollCarousel(1)">التالي <i class="fas fa-arrow-left"></i></button>
-          </div>
           
-          <div class="carousel-indicators">
+          
+          <!-- <div class="carousel-indicators">
             <div class="indicator active"></div>
             <div class="indicator"></div>
             <div class="indicator"></div>
-          </div>
+          </div> -->
         </div>
+        <div class="carousel-controls">
+            <button onclick="scrollCarousel(-1)"><i class="fas fa-arrow-right"></i> السابق</button>
+            <button onclick="scrollCarousel(1)">التالي <i class="fas fa-arrow-left"></i></button>
+          </div>
       </section>
     </main>
 
@@ -663,7 +739,7 @@
         <a href="#"><i class="fab fa-youtube"></i></a>
       </div> -->
       <p>© 2025 مشروع رشيق. جميع الحقوق محفوظة.</p>
-      <p>نظام متكامل لتحقيق الصحة واللياقة البدنية</p>
+      <!-- <p>نظام متكامل لتحقيق الصحة واللياقة البدنية</p> -->
     </footer>
   </div>
 
@@ -693,7 +769,7 @@
         });
       });
       
-      // Initialize progress bar animation
+    //   Initialize progress bar animation
       const progressFill = document.querySelector('.progress-fill');
       setTimeout(() => {
         progressFill.style.width = '65%';
@@ -746,7 +822,7 @@
       if (bmi < 18.5) {
         tip = "وزنك أقل من الطبيعي. ينصح بزيادة السعرات الحرارية اليومية مع التركيز على الأطعمة الغنية بالبروتين والدهون الصحية. تمارين المقاومة ستساعد في بناء الكتلة العضلية.";
       } else if (bmi < 25) {
-        tip = "مبروك! وزنك في النطاق الصحي المثالي. حافظ على نمط حياتك الصحي من خلال التغذية المتوازنة والنشاط البدني المنتظم. استمر في مراقبة وزنك شهريًا.";
+        tip = "مبروك! وزنك في النطاق الصحي المثالي. حافظ على نمط حياتك الصحي من خلال التغذية المتوازنة والنشاط البدني المنتظم. ,استمر في مراقبة وزنك شهريًا.";
       } else if (bmi < 30) {
         tip = "تعاني من زيادة في الوزن. ينصح بتقليل الدهون والسكريات وزيادة النشاط البدني. ابدأ بممارسة رياضة المشي 30 دقيقة يوميًا وقلل من الوجبات السريعة.";
       } else {
@@ -768,23 +844,15 @@
     let currentSlide = 0;
     
     function scrollCarousel(direction) {
-      const carousel = document.getElementById('carousel');
-      const slides = document.querySelectorAll('.product-card');
-      const indicators = document.querySelectorAll('.indicator');
-      const slideWidth = slides[0].offsetWidth + 30; // width + gap
-      
-      currentSlide += direction;
-      
-      if (currentSlide < 0) currentSlide = slides.length - 1;
-      if (currentSlide >= slides.length) currentSlide = 0;
-      
-      carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
-      
-      // Update indicators
-      indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentSlide);
-      });
-    }
+  const carouselWrapper = document.querySelector('.carousel-wrapper');
+  const scrollAmount = carouselWrapper.offsetWidth * 0.9; // adjust for margin
+
+  if (direction === 1) {
+    carouselWrapper.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  } else {
+    carouselWrapper.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+  }
+}
   </script>
 </body>
 </html>
