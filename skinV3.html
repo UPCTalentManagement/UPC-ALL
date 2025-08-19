@@ -1041,11 +1041,115 @@
         background: #ff7e5f; 
         color: white; 
     } 
+    
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.nav-logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 25px;
+  transition: background 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.burger {
+  display: none;
+  font-size: 28px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 10px 0;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-links li {
+    text-align: center;
+    padding: 10px 0;
+  }
 </style>
 
 
 </head>
 <body>
+    <nav class="navbar">
+  <div class="nav-container">
+    
+    <button class="burger" id="burger">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="AB.html">AB Calculator</a></li>
+        <li><a href="safe.html">Pregnancy Safety</a></li>
+        <li><a href="ask.html">Ask</a></li>
+        <li><a href="consult.html">Consultation</a></li>
+        <li><a href="main.html">Home</a></li>
+    </ul>
+    <a href="main.html" class="nav-logo">
+      <img src="logo.png" alt="Logo">
+      <span>UPC Consult</span>
+    </a>
+  </div>
+</nav>
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -1353,6 +1457,9 @@
     </div>
 
     <script>
+        document.getElementById("burger").addEventListener("click", function () {
+    document.getElementById("navLinks").classList.toggle("show");
+  });
         let currentSkinType = null;
 
         function showSkinType(skinType) {
